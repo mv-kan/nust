@@ -2,15 +2,15 @@
 
 ## TL;DR
 
-**Problem**: you installed fresh linux on new PC and now you need to configure vim, fetch all your personal git repos, install bunch of software, enable couple of systemds. Man that sucks. 
+**🚩 Problem**: you installed fresh linux on new PC and now you need to configure vim, fetch all your personal git repos, install bunch of software, enable couple of systemds. Man that sucks. 
 
-**Solution**: No worries,`nust` is a really easy to understand setup tool exacly for these kinds of problems.
+**🎯 Solution**: No worries,`nust` is a really easy to understand setup tool exacly for these kinds of problems.
 
-**How**: You can create your **nust packages** for your purposes. Nust is just hub for all of your scripts you want to run on your new fresh installed linux. `nust` makes it really easy to fetch these scripts from remote location for e.g. GitHub. 
+**🧐 How**: You can create your **nust packages** for your purposes. Nust is just hub for all of your scripts you want to run on your new fresh installed linux. `nust` makes it really easy to fetch these scripts from remote location for e.g. GitHub. 
 
-**How it works**: **nust package** is just a **makefile** with **nust_do**(required), **nust_undo**(optional) commands. You can create nust package locally or you can give to `nust` a link to your GitHub repository that is **nust package**.
+**🤔 How it works**: **nust package** is just a **makefile** with **nust_do**(required), **nust_undo**(optional) commands. You can create nust package locally or you can give to `nust` a link to your GitHub repository that is **nust package**.
 
-**Best practice**: make nust packages as independent as possible. 
+**✨ Best practice**: make nust packages as independent as possible. 
 
 Oh also, have I mentioned that `nust` program should work on **any** linux distribution? 
 
