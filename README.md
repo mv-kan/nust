@@ -6,11 +6,11 @@
 
 **🎯 Solution**: No worries,`nust` is a really easy to understand setup tool exacly for these kinds of problems.
 
-**🧐 How**: You can create your **nust homeworks** for your purposes. Nust is just hub for all of your scripts you want to run on your new fresh installed linux. `nust` makes it really easy to fetch these scripts from remote location for e.g. GitHub. 
+**🧐 How**: You can create your **nust tasks** for your purposes. Nust is just hub for all of your scripts you want to run on your new fresh installed linux. `nust` makes it really easy to fetch these scripts from remote location for e.g. GitHub. 
 
-**🤔 How it works**: **nust homework** is just a **makefile** with **nust_do**(required), **nust_undo**(optional) commands. You can create nust homework locally or you can give to `nust` a link to your GitHub repository that is **nust homework**.
+**🤔 How it works**: **nust task** is just a **makefile** with **nust_do**(required), **nust_undo**(optional) targets. You can create nust task locally or you can give to `nust` a link to your GitHub repository that has **nust task** or **nust tasks**. 
 
-**✨ Best practice**: make nust homeworks as independent as possible. 
+**✨ Best practice**: make nust tasks as independent as possible. 
 
 Oh also, have I mentioned that `nust` program should work on **any** linux distribution? 
 
