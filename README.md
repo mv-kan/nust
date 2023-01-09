@@ -29,7 +29,7 @@ nust do -t my_task.nust
 
 Executing one `nust` task with arguments for `makefile`:
 ```
-nust do -t my_task.nust -m "VERY_SECRET_KEY=secret_key EXAMPLE_VAR=example"
+nust do -t my_task.nust -m "VERY_SECRET_KEY_FILE=secret_key_file_path EXAMPLE_VAR=example"
 ```
 
 Executing nust package (you can see examples folder to get more details):
