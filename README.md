@@ -16,45 +16,28 @@ Oh also, have I mentioned that `nust` program should work on **any** linux distr
 
 ## Ok you hooked me up, but actually where to start with `nust`? 
 
+## Requirements
+
+You have to have `git` and `make` commands on your system
+
 ### basics
 
-nust from folder (scans for files with .nust extension for e.g. install_software.nust, configure_my_systemd.nust or "makefile" filename)
+Executing one `nust` task:
 ```
-nust do -d ./folder
-# undo (requires nust_undo command in makefile)
-nust undo -d ./folder
+nust do -t my_task.nust
 ```
 
-nust with one file 
+Executing one `nust` task with arguments for `makefile`:
 ```
-nust do -f ./makefile
-# undo (requires nust_undo command in makefile)
-nust undo -f ./makefile 
+nust do -t my_task.nust -m "VERY_SECRET_KEY=secret_key EXAMPLE_VAR=example"
 ```
 
-nust with url to repo (in repo there have to be file with "makefile" name or files with .nust extension in root dir of repo) 
+Executing nust package (you can see examples folder to get more details):
 ```
-nust do -r https://github.com/your-name/your-nust-package
-```
-
-### List of repos
-
-Yes you can make multi do from one file.
-
-```
-# in my_linux_setup file
-
-# install all software I need for work like vscode, calibre, steam, snap, flathub 
-https://github.com/your-name/your-nust-package1
-
-# enable couple of services in systemd
-https://github.com/your-name/your-nust-package2
-
-# copy to home directory all github repos I am working on
-https://github.com/your-name/your-nust-package3
+nust do -p my_desktop_setup.nustpackage
 ```
 
-give nust list of repos
+Fetching and executing nust package from repo (again more examples in folder examples):
 ```
-nust do -l my_linux_setup
+nust do -r https://github.com/example/example-nustpackage
 ```
