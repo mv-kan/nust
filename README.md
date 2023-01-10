@@ -43,7 +43,7 @@ nust do -p my_desktop_setup.nustpack
 
 Fetching and executing `nust` package from repo (again more examples in folder examples):
 ```
-nust do -r https://github.com/example/example-nustpackage
+nust do -r https://github.com/exampleuser/nustpack-example-package
 ```
 
 ### Naming your `nust` package repositories 
