@@ -60,4 +60,4 @@ https://github.com/exampleuser/nustpack-ubuntu-virtualization-setup
 https://github.com/exampleuser/nustpack-my-firewall-config
 ```
 
-This is merely my suggestion you can completely ignore it if you want. But if you wrote nust package why wouldn't you make it useful for somebody else too?
+This is merely my suggestion you can completely ignore it if you want. But if you wrote nust package why wouldn't you make it useful for somebody else too 😉?
