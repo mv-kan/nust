@@ -20,6 +20,10 @@ Oh also, have I mentioned that `nust` program should work on **any** linux distr
 
 You have to have `git` and `make` commands on your system
 
+## Installation
+
+pls write here when your program is ready 
+
 ### basics
 
 Executing one `nust` task:
@@ -60,4 +64,4 @@ https://github.com/exampleuser/nustpack-ubuntu-virtualization-setup
 https://github.com/exampleuser/nustpack-my-firewall-config
 ```
 
-This is merely my suggestion you can completely ignore it if you want. But if you wrote nust package why wouldn't you make it useful for somebody else too 😉?
+This is merely my suggestion you can completely ignore it if you want. But if you wrote nust package why wouldn't you make it useful for somebody else too ;)?
