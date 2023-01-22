@@ -18,7 +18,7 @@ Oh also, have I mentioned that `nust` program should work on **any** linux distr
 
 ## Requirements
 
-You have to have `git` and `make` commands on your system
+You have to have `make` command on your system
 
 ## Installation
 
@@ -31,9 +31,9 @@ Executing one `nust` task:
 nust do -t my_task.nust
 ```
 
-Executing one `nust` task with arguments for `makefile`:
+Executing one `nust` task with arguments for `makefile`, everything that is after `-m` goes to `makefile`:
 ```
-nust do -t my_task.nust -m "VERY_SECRET_KEY_FILE=secret_key_file_path EXAMPLE_VAR=example"
+nust do -t my_task.nust -m VERY_SECRET_KEY_FILE=secret_key_file_path EXAMPLE_VAR=example
 ```
 
 Executing `nust` package (you can see examples folder to get more details):
@@ -47,7 +47,6 @@ nust do -r https://github.com/exampleuser/nustpack-example-package
 ```
 
 ### Naming your `nust` package repositories 
-
 
 ```
 nustpack-<distro>-<name of nust package>
