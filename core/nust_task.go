@@ -1,10 +1,10 @@
 package core
 
 type NustTask struct {
-	Name string
+	Filepath string // not full but relative to the nustpackage
 }
 
 type NustTaskJSON struct {
-	Name   string
-	Status bool // true OK, false NOT OK
+	Filepath string
+	Status   bool // true OK, false NOT OK
 }

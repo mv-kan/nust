@@ -1,8 +1,7 @@
 package core
 
 import (
-	"bytes"
-	"fmt"
+	"os"
 	"os/exec"
 )
 
@@ -11,22 +10,21 @@ func runTarget(file string, target string, makeargs ...string) error {
 	makeargs = append([]string{target}, makeargs...)
 	cmd := exec.Command("make", makeargs...)
 
-	var out bytes.Buffer
-	cmd.Stdout = &out
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
 
 	err := cmd.Run()
 
-	fmt.Printf("%s", out.String())
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func NustDo(file string, makeargs ...string) error {
+func nustDo(file string, makeargs ...string) error {
 	return runTarget(file, "nust_do", makeargs...)
 }
 
-func NustUndo(file string, makeargs ...string) error {
+func nustUndo(file string, makeargs ...string) error {
 	return runTarget(file, "nust_undo", makeargs...)
 }
