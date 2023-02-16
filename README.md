@@ -22,45 +22,9 @@ You have to have `make` command on your system
 
 ## Installation
 
+UNDER CONSTRUCTION
+
 pls write here when your program is ready 
 
-### basics
-
-Executing one `nust` task:
-```
-nust do -t my_task.nust
-```
-
-Executing one `nust` task with arguments for `makefile`, everything that is after `-m` goes to `makefile`:
-```
-nust do -t my_task.nust -m VERY_SECRET_KEY_FILE=secret_key_file_path EXAMPLE_VAR=example
-```
-
-Executing `nust` package (you can see examples folder to get more details):
-```
-nust do -p my_desktop_setup.nustpack
-```
-
-Fetching and executing `nust` package from repo (again more examples in folder examples):
-```
-nust do -r https://github.com/exampleuser/nustpack-example-package
-```
-
-### Naming your `nust` package repositories 
-
-```
-nustpack-<distro>-<name of nust package>
-```
-
-if your `nust` package is distro dependent then put name of a distro, otherwise you can omit it. 
-
-For e.g
-```
-https://github.com/exampleuser/nustpack-manjaro-my-desktop-setup
-https://github.com/exampleuser/nustpack-arch-my-desktop-setup
-https://github.com/exampleuser/nustpack-setup-neovim-config
-https://github.com/exampleuser/nustpack-ubuntu-virtualization-setup
-https://github.com/exampleuser/nustpack-my-firewall-config
-```
 
 This is merely my suggestion you can completely ignore it if you want. But if you wrote nust package why wouldn't you make it useful for somebody else too ;)?
