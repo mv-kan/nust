@@ -5,9 +5,23 @@ import (
 	"os/exec"
 )
 
+func deleteEmpty(s []string) []string {
+	var r []string
+	for _, str := range s {
+		if str != "" {
+			r = append(r, str)
+		}
+	}
+	return r
+}
+
 func runTarget(file string, target string, makeargs ...string) error {
-	makeargs = append(makeargs, "-f", file)
 	makeargs = append([]string{target}, makeargs...)
+	makeargs = append([]string{"-f", file}, makeargs...)
+
+	// if you got empty string in makeargs it will break exec.Command func
+	makeargs = deleteEmpty(makeargs)
+
 	cmd := exec.Command("make", makeargs...)
 
 	cmd.Stdout = os.Stdout
