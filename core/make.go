@@ -5,16 +5,6 @@ import (
 	"os/exec"
 )
 
-func deleteEmpty(s []string) []string {
-	var r []string
-	for _, str := range s {
-		if str != "" {
-			r = append(r, str)
-		}
-	}
-	return r
-}
-
 func runTarget(file string, target string, makeargs ...string) error {
 	makeargs = append([]string{target}, makeargs...)
 	makeargs = append([]string{"-f", file}, makeargs...)
