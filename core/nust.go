@@ -24,7 +24,7 @@ func loadExecInfo(dir string) []NustTaskJSON {
 	nustTasks := []NustTaskJSON{}
 	err = json.Unmarshal(content, &nustTasks)
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
 	}
 	return nustTasks
 }
@@ -69,7 +69,9 @@ func DoTask(file string, makeargs ...string) error {
 
 	return err
 }
-
+func remove[T any](slice []T, s int) []T {
+	return append(slice[:s], slice[s+1:]...)
+}
 func UndoTask(file string, makeargs ...string) error {
 	// check if exists
 	_, err := os.Stat(file)
@@ -78,15 +80,24 @@ func UndoTask(file string, makeargs ...string) error {
 	}
 
 	nustTasks := loadExecInfo(filepath.Dir(file))
-	for _, task := range nustTasks {
+	for i, task := range nustTasks {
 		// if exists and status is positive
 		if task.Filepath == file && task.Status {
 			err = nustUndo(file, makeargs...)
-			task.Status = false
-			_ = saveExecInfo(filepath.Dir(file), nustTasks)
+			_ = saveExecInfo(filepath.Dir(file), remove(nustTasks, i))
 
 			return err
 		}
 	}
-	return errors.New(fmt.Sprintf("cannot find \"%s\" in \"%s\" with status true, try to use force undo with flag -f", file, execInfoFileName))
+	return ErrNotDonePrev
+}
+
+func DoTaskForce(file string, makeargs ...string) error {
+	err := nustDo(file, makeargs...)
+	return err
+}
+
+func UndoTaskForce(file string, makeargs ...string) error {
+	err := nustUndo(file, makeargs...)
+	return err
 }
