@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/mv-kan/nust/core"
 	"github.com/spf13/cobra"
 )
@@ -14,8 +12,7 @@ var doCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		force, _ := cmd.Flags().GetBool("force")
 		makeargs, _ := cmd.Flags().GetString("makeargs")
-		fmt.Printf("COBRA: %s\n", args[0])
-		fmt.Printf("makefiles: %s\n", makeargs)
+
 		if force {
 			core.DoTaskForce(args[0], makeargs)
 		} else {
