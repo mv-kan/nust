@@ -16,6 +16,7 @@ func DoTask(file string, makeargs ...string) error {
 	nustTask := NustTaskJSON{Filepath: file, Status: false}
 
 	nustTasks := loadExecInfo(filepath.Dir(file))
+	fmt.Println("nustTasks: ", nustTasks)
 	for _, task := range nustTasks {
 		// if exists then don't run make target
 		if task.Filepath == nustTask.Filepath && task.Status {
@@ -28,6 +29,10 @@ func DoTask(file string, makeargs ...string) error {
 	if err != nil {
 		return err
 	}
+	// in nustDo command may be other nust tasks so we need to update nustTasks obj in case if some nusttasks were finished
+	nustTasks = loadExecInfo(filepath.Dir(file))
+	fmt.Println("nustTasks: ", nustTasks)
+
 	nustTask.Status = true
 
 	nustTasks = append(nustTasks, nustTask)
