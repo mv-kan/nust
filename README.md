@@ -16,15 +16,24 @@ Oh also, have I mentioned that `nust` program should work on **any** linux distr
 
 ## Ok you hooked me up, but actually where to start with `nust`? 
 
-## Requirements
+### Requirements
 
 You have to have `make` command on your system
 
-## Installation
+### Installation`
 
-UNDER CONSTRUCTION
+Download .tar.gz file unpack it and you will find `nust` binary. To install `nust` copy it to `/usr/bin/` directory like this:
+```
+sudo cp ./nust /usr/bin/
+```
 
-pls write here when your program is ready 
+To uninstall use:
+```
+sudo rm /usr/bin/nust
+```
 
+## Using the damn thing
+
+Paste here your ubuntu desktop setup
 
 This is merely my suggestion you can completely ignore it if you want. But if you wrote nust package why wouldn't you make it useful for somebody else too ;)?
