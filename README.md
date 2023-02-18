@@ -20,7 +20,7 @@ Oh also, have I mentioned that `nust` program should work on **any** linux distr
 
 You have to have `make` command on your system
 
-### Installation`
+### Installation
 
 Download .tar.gz file unpack it and you will find `nust` binary. To install `nust` copy it to `/usr/bin/` directory like this:
 ```
