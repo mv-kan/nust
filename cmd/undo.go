@@ -1,6 +1,9 @@
 package cmd
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/mv-kan/nust/core"
 	"github.com/spf13/cobra"
 )
@@ -13,10 +16,16 @@ var undoCmd = &cobra.Command{
 		force, _ := cmd.Flags().GetBool("force")
 		makeargs, _ := cmd.Flags().GetString("makeargs")
 
+		var err error
 		if force {
-			core.UndoTaskForce(args[0], makeargs)
+			err = core.UndoTaskForce(args[0], makeargs)
 		} else {
-			core.UndoTask(args[0], makeargs)
+			err = core.UndoTask(args[0], makeargs)
+		}
+
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "NUST ERROR: %v\n", err)
+			os.Exit(1)
 		}
 	},
 }

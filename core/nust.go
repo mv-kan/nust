@@ -3,6 +3,7 @@ package core
 import (
 	"errors"
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 )
@@ -16,7 +17,7 @@ func DoTask(file string, makeargs ...string) error {
 	nustTask := NustTaskJSON{Filepath: file, Status: false}
 
 	nustTasks := loadExecInfo(filepath.Dir(file))
-	fmt.Println("nustTasks: ", nustTasks)
+
 	for _, task := range nustTasks {
 		// if exists then don't run make target
 		if task.Filepath == nustTask.Filepath && task.Status {
@@ -26,17 +27,38 @@ func DoTask(file string, makeargs ...string) error {
 	}
 
 	err = nustDo(file, makeargs...)
+
+	// depending on error we set status to false if fail and true if ok
 	if err != nil {
-		return err
+		nustTask.Status = false
+	} else {
+		nustTask.Status = true
 	}
 	// in nustDo command may be other nust tasks so we need to update nustTasks obj in case if some nusttasks were finished
 	nustTasks = loadExecInfo(filepath.Dir(file))
-	fmt.Println("nustTasks: ", nustTasks)
 
-	nustTask.Status = true
+	// unoptimized I know but I don't care
+	// we check if in new nustTasks there is already some task with same filepath
+	// if there is same task we just change value in nustTasks, otherwise we add to nustTasks new element nustTask
+	if len(nustTasks) == 0 {
+		nustTasks = append(nustTasks, nustTask)
+	}
+	for i, task := range nustTasks {
+		// if exists then don't run make target
+		if task.Filepath == nustTask.Filepath {
+			nustTasks[i] = nustTask
+			break
+		}
+		// on last iter and no break means that not found
+		if i+1 == len(nustTasks) {
+			nustTasks = append(nustTasks, nustTask)
+		}
+	}
 
-	nustTasks = append(nustTasks, nustTask)
-	err = saveExecInfo(filepath.Dir(file), nustTasks)
+	saveerr := saveExecInfo(filepath.Dir(file), nustTasks)
+	if saveerr != nil {
+		log.Fatal(err)
+	}
 
 	return err
 }

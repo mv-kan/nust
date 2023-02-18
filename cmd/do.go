@@ -1,6 +1,9 @@
 package cmd
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/mv-kan/nust/core"
 	"github.com/spf13/cobra"
 )
@@ -13,10 +16,17 @@ var doCmd = &cobra.Command{
 		force, _ := cmd.Flags().GetBool("force")
 		makeargs, _ := cmd.Flags().GetString("makeargs")
 
+		var err error
+
 		if force {
-			core.DoTaskForce(args[0], makeargs)
+			err = core.DoTaskForce(args[0], makeargs)
 		} else {
-			core.DoTask(args[0], makeargs)
+			err = core.DoTask(args[0], makeargs)
+		}
+
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "NUST ERROR: %v\n", err)
+			os.Exit(1)
 		}
 	},
 }
