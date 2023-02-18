@@ -3,10 +3,7 @@
 on:
   release:
     types: [created]
-on:
-  push:
-    branches:
-      - main
+
 jobs:
   release-linux-amd64:
     name: release linux/amd64
