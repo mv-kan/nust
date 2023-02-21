@@ -4,7 +4,7 @@
 
 **🚩 Problem**: you installed fresh linux on new PC and now you need to configure vim, fetch all your personal git repos, install bunch of software, enable couple of systemds. Man that sucks. 
 
-**🎯 Solution**: No worries,`nust` is a really easy to understand setup tool exacly for these kinds of problems.
+**🎯 Solution**: No worries,`nust` is a really easy to understand setup tool exactly for these kinds of problems.
 
 **🧐 How**: You can create your **nust tasks** for your purposes. Nust is just hub for all of your scripts you want to run on your new fresh installed linux. `nust` makes it really easy to fetch these scripts from remote location for e.g. GitHub. 
 
