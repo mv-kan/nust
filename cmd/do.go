@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/fatih/color"
 	"github.com/mv-kan/nust/core"
 	"github.com/spf13/cobra"
 )
@@ -15,6 +16,10 @@ var doCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		force, _ := cmd.Flags().GetBool("force")
 		makeargs, _ := cmd.Flags().GetString("makeargs")
+		nocolor, _ := cmd.Flags().GetBool("no-color")
+		if nocolor {
+			color.NoColor = true // disables colorized output
+		}
 
 		var err error
 
