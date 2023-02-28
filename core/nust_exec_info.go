@@ -3,10 +3,11 @@ package core
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"log"
 	"os"
 	"path"
+
+	"github.com/mv-kan/nust/console"
 )
 
 const execInfoFileName = "nust_exec_info.json"
@@ -17,13 +18,15 @@ func loadExecInfo(dir string) []NustTaskJSON {
 		return []NustTaskJSON{}
 	}
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		console.Danger(err.Error())
 	}
 
 	nustTasks := []NustTaskJSON{}
 	err = json.Unmarshal(content, &nustTasks)
 	if err != nil {
 		log.Print(err)
+		console.Danger(err.Error())
 	}
 	return nustTasks
 }
@@ -33,7 +36,7 @@ func saveExecInfo(dir string, tasks []NustTaskJSON) error {
 
 	content, err := json.Marshal(tasks)
 	if err != nil {
-		fmt.Println(err)
+		console.Danger(err.Error())
 	}
 
 	err = os.WriteFile(path.Join(dir, execInfoFileName), content, 0755) // write permission

@@ -32,6 +32,22 @@ To uninstall use:
 sudo rm /usr/bin/nust
 ```
 
+## Why use `nust` and not usual .sh scripts?
+
+`nust` has couple of advantages
+
+1. You can have do and undo actions in one file (makefile)
+2. `nust` has recovery option built in. 
+
+```
+nust_do:
+    nust do ./task1.nust # skip on rerun because this task on the first run was successful
+    nust do ./task2.nust # fail 
+    nust do ./task3.nust
+```
+
+if `task2.nust` would fail, then we can rerun and it will skip `task1.nust` because `nust` will write status of the task in `nust_exec_info.json` file. 
+
 ## Using the damn thing
 
 Paste here your ubuntu desktop setup

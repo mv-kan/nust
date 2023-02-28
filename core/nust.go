@@ -6,6 +6,8 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+
+	"github.com/mv-kan/nust/console"
 )
 
 func DoTask(file string, makeargs ...string) error {
@@ -21,7 +23,7 @@ func DoTask(file string, makeargs ...string) error {
 	for _, task := range nustTasks {
 		// if exists then don't run make target
 		if task.Filepath == nustTask.Filepath && task.Status {
-			fmt.Printf("NUST: skip the \"%s\" file, because it was already executed and saved to \"%s\" in the same dir\n", file, execInfoFileName)
+			console.Warning(fmt.Sprintf("NUST: skip the \"%s\" file, because it was already executed and saved to \"%s\" in the same dir\n", file, execInfoFileName))
 			return nil
 		}
 	}
