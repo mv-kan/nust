@@ -21,7 +21,9 @@ See more info about the tool at https://github.com/mv-kan/nust`,
 }
 
 func Execute() {
+	rootCmd.PersistentFlags().Bool("no-color", false, "no color in output")
 	err := rootCmd.Execute()
+
 	if err != nil {
 		os.Exit(1)
 	}

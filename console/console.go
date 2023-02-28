@@ -1,10 +1,14 @@
 package console
 
-import "github.com/fatih/color"
+import (
+	"os"
+
+	"github.com/fatih/color"
+)
 
 func Danger(s string) {
 	c := color.New(color.FgRed, color.Bold)
-	c.Println(s)
+	c.Fprintf(os.Stderr, s)
 }
 
 func Warning(s string) {
