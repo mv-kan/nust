@@ -53,3 +53,8 @@ if `task2.nust` would fail, then we can rerun and it will skip `task1.nust` beca
 Paste here your ubuntu desktop setup
 
 This is merely my suggestion you can completely ignore it if you want. But if you wrote nust package why wouldn't you make it useful for somebody else too ;)?
+
+## TODO
+
+- rewrite do and undo in a way that they use only one code without duplicates 
+- create more examples
