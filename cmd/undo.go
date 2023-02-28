@@ -22,17 +22,24 @@ var undoCmd = &cobra.Command{
 			color.NoColor = true // disables colorized output
 		}
 
-		var err error
-		if force {
-			err = core.UndoTaskForce(args[0], makeargs)
-		} else {
-			err = core.UndoTask(args[0], makeargs)
-		}
-
-		if err != nil {
-			console.Danger(fmt.Sprintf("NUST ERROR: %v\n", err))
-
-			os.Exit(1)
+		i := 0
+		for {
+			var err error
+			if force {
+				err = core.UndoTaskForce(args[0], makeargs)
+			} else {
+				err = core.UndoTask(args[0], makeargs)
+			}
+			if err != nil {
+				console.Danger(fmt.Sprintf("(nust try number %d): %v\n", i, err))
+				i++
+				if i >= 10 {
+					os.Exit(1)
+					break
+				}
+			} else {
+				break
+			}
 		}
 	},
 }
@@ -40,6 +47,5 @@ var undoCmd = &cobra.Command{
 func init() {
 	undoCmd.PersistentFlags().StringP("makeargs", "m", "", "pass flags and values to makefile")
 	undoCmd.PersistentFlags().BoolP("force", "f", false, "run without checks in the exec info json file")
-	// undoCmd.PersistentFlags().BoolP("no-auto-recovery", "n", true, "run without checks in the exec info json file")
 	rootCmd.AddCommand(undoCmd)
 }

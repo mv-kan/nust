@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/fatih/color"
+	"github.com/mv-kan/nust/console"
 	"github.com/mv-kan/nust/core"
 	"github.com/spf13/cobra"
 )
@@ -20,18 +21,24 @@ var doCmd = &cobra.Command{
 		if nocolor {
 			color.NoColor = true // disables colorized output
 		}
-
-		var err error
-
-		if force {
-			err = core.DoTaskForce(args[0], makeargs)
-		} else {
-			err = core.DoTask(args[0], makeargs)
-		}
-
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "NUST ERROR: %v\n", err)
-			os.Exit(1)
+		i := 0
+		for {
+			var err error
+			if force {
+				err = core.DoTaskForce(args[0], makeargs)
+			} else {
+				err = core.DoTask(args[0], makeargs)
+			}
+			if err != nil {
+				console.Danger(fmt.Sprintf("(nust try number %d): %v\n", i, err))
+				i++
+				if i >= 10 {
+					os.Exit(1)
+					break
+				}
+			} else {
+				break
+			}
 		}
 	},
 }
