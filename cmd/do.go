@@ -18,6 +18,8 @@ var doCmd = &cobra.Command{
 		force, _ := cmd.Flags().GetBool("force")
 		makeargs, _ := cmd.Flags().GetString("makeargs")
 		nocolor, _ := cmd.Flags().GetBool("no-color")
+		nomoretries, _ := cmd.Flags().GetBool("no-more-tries")
+
 		if nocolor {
 			color.NoColor = true // disables colorized output
 		}
@@ -32,7 +34,7 @@ var doCmd = &cobra.Command{
 			if err != nil {
 				console.Danger(fmt.Sprintf("(nust try number %d): %v\n", i, err))
 				i++
-				if i >= 10 {
+				if i >= 10 || nomoretries {
 					os.Exit(1)
 					break
 				}
@@ -46,5 +48,6 @@ var doCmd = &cobra.Command{
 func init() {
 	doCmd.PersistentFlags().StringP("makeargs", "m", "", "pass flags and values to makefile")
 	doCmd.PersistentFlags().BoolP("force", "f", false, "run without checks in the exec info json file")
+	doCmd.PersistentFlags().Bool("no-more-tries", false, "no more tries for this do task command")
 	rootCmd.AddCommand(doCmd)
 }
