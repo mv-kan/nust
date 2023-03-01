@@ -10,38 +10,53 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var doCmd = &cobra.Command{
-	Use:   "do",
-	Short: "do a nust task",
-	Args:  cobra.ExactArgs(1),
-	Run: func(cmd *cobra.Command, args []string) {
-		force, _ := cmd.Flags().GetBool("force")
-		makeargs, _ := cmd.Flags().GetString("makeargs")
-		nocolor, _ := cmd.Flags().GetBool("no-color")
-		nomoretries, _ := cmd.Flags().GetBool("no-more-tries")
+func doOrUndo(isDo bool, cmd *cobra.Command, args []string) {
+	force, _ := cmd.Flags().GetBool("force")
+	makeargs, _ := cmd.Flags().GetString("makeargs")
+	nocolor, _ := cmd.Flags().GetBool("no-color")
+	nomoretries, _ := cmd.Flags().GetBool("no-more-tries")
 
-		if nocolor {
-			color.NoColor = true // disables colorized output
-		}
-		i := 0
-		for {
-			var err error
+	if nocolor {
+		color.NoColor = true // disables colorized output
+	}
+	i := 0
+	for {
+		var err error
+		if isDo {
+			// run DO
 			if force {
 				err = core.DoTaskForce(args[0], makeargs)
 			} else {
 				err = core.DoTask(args[0], makeargs)
 			}
-			if err != nil {
-				console.Danger(fmt.Sprintf("(nust try number %d): %v\n", i, err))
-				i++
-				if i >= 10 || nomoretries {
-					os.Exit(1)
-					break
-				}
+		} else {
+			// run UNDO
+			if force {
+				err = core.UndoTaskForce(args[0], makeargs)
 			} else {
-				break
+				err = core.UndoTask(args[0], makeargs)
 			}
 		}
+
+		if err != nil {
+			console.Danger(fmt.Sprintf("(\"%s\" try number %d): %v\n", args[0], i, err))
+			i++
+			if i >= 10 || nomoretries {
+				os.Exit(1)
+				break
+			}
+		} else {
+			break
+		}
+	}
+}
+
+var doCmd = &cobra.Command{
+	Use:   "do",
+	Short: "do a nust task",
+	Args:  cobra.ExactArgs(1),
+	Run: func(cmd *cobra.Command, args []string) {
+		doOrUndo(true, cmd, args)
 	},
 }
 

@@ -50,11 +50,8 @@ if `task2.nust` would fail, then we can rerun and it will skip `task1.nust` beca
 
 ## Using the damn thing
 
-Paste here your ubuntu desktop setup
+this is example how can you use `nust` to set up your workspace in ubuntu 22.04
 
-This is merely my suggestion you can completely ignore it if you want. But if you wrote nust package why wouldn't you make it useful for somebody else too ;)?
-
-## TODO
-
-- rewrite do and undo in a way that they use only one code without duplicates 
-- create more examples
+```
+https://github.com/mv-kan/nustpack-ubuntu2204-mysetup
+```
