@@ -2,6 +2,10 @@
 
 # nust (not unique setup tool)
 
+# Refactor...
+
+So in version 2.0 I want to change make to bash but leave all functionality with recovery mode and nust_exec_info.json file
+
 ## TL;DR
 
 **🚩 Problem**: you installed fresh linux on new PC and now you need to configure vim, fetch all your personal git repos, install bunch of software, enable couple of systemds. Man that sucks. 
