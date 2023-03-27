@@ -1,4 +1,4 @@
-<img src="./static/NUST.svg"  width="18%"/>
+<img src="./static/NUST.svg"  width="25%"/>
 
 # nust (not unique setup tool)
 
