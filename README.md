@@ -2,29 +2,15 @@
 
 # nust (not unique setup tool)
 
-# Refactor...
-
-So in version 2.0 I want to change make to bash but leave all functionality with recovery mode and nust_exec_info.json file
-
 ## TL;DR
 
 **🚩 Problem**: you installed fresh linux on new PC and now you need to configure vim, fetch all your personal git repos, install bunch of software, enable couple of systemds. Man that sucks. 
 
-**🎯 Solution**: No worries,`nust` is a really easy to understand setup tool exactly for these kinds of problems.
+**🎯 Solution**: Bruh just write `shell` scripts to do all of that 
 
-**🧐 How**: You can create your **nust tasks** for your purposes. Nust is just hub for all of your scripts you want to run on your new fresh installed linux. `nust` makes it really easy to fetch these scripts from remote location for e.g. GitHub. 
-
-**🤔 How it works**: **nust task** is just a **makefile** with **nust_do**(required), **nust_undo**(optional) targets. nust tasks can be bundled into **nust package**. You can create nust task locally or you can give to `nust` a link to your GitHub repository that has **nust package**. 
-
-**✨ Best practice**: make nust tasks as independent as possible. 
-
-Oh also, have I mentioned that `nust` program should work on **any** linux distribution? 
+**🤔 But if I have scripts why `nust` exists?**: `nust` is basically middle man between your `sh` or `bash` script and the `/bin/bash` program. `nust` can perform retries and save the outcome of runned script in `nust_exec_info.json` (true is not fail, false is fail). This is nothing out of ordinary, just quality of life program. Maybe in future I will add more of that qol things to make `nust` a viable program for someone to use. Maybe...
 
 ## Ok you hooked me up, but actually where to start with `nust`? 
-
-### Requirements
-
-You have to have `make` command on your system
 
 ### Installation
 
@@ -38,21 +24,9 @@ To uninstall use:
 sudo rm /usr/bin/nust
 ```
 
-## Why use `nust` and not usual .sh scripts?
+#### Personally
 
-`nust` has couple of advantages
-
-1. You can have do and undo actions in one file (makefile)
-2. `nust` has recovery option built in. 
-
-```
-nust_do:
-    nust do ./task1.nust # skip on rerun because this task on the first run was successful
-    nust do ./task2.nust # fail 
-    nust do ./task3.nust
-```
-
-if `task2.nust` would fail, then we can rerun and it will skip `task1.nust` because `nust` will write status of the task in `nust_exec_info.json` file. 
+Personally I would just bake in the nust program into my repo with setup like in https://github.com/mv-kan/nustpack-ubuntu2204-mysetup
 
 ## Using the damn thing
 
