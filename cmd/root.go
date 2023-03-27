@@ -18,6 +18,11 @@ var rootCmd = &cobra.Command{
 See more info about the tool at https://github.com/mv-kan/nust`,
 	Example: ``,
 	Run: func(cmd *cobra.Command, args []string) {
+		if len(args) == 0 {
+			console.Message("use --help flag to get more info")
+			return
+		}
+
 		nocolor, _ := cmd.Flags().GetBool("no-color")
 		force, _ := cmd.Flags().GetBool("force")
 		retries, _ := cmd.Flags().GetInt("retries")
