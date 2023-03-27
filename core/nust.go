@@ -10,31 +10,32 @@ import (
 	"github.com/mv-kan/nust/console"
 )
 
-func DoTask(file string, makeargs ...string) error {
+func NustRun(file string, args ...string) error {
 	// check if exists
 	_, err := os.Stat(file)
 	if errors.Is(err, os.ErrNotExist) {
 		return err
 	}
-	nustTask := NustTaskJSON{Filepath: file, Status: false}
+	nustTask := NustTaskJSON{Filepath: file, Success: false}
 
 	nustTasks := loadExecInfo(filepath.Dir(file))
 
 	for _, task := range nustTasks {
 		// if exists then don't run make target
-		if task.Filepath == nustTask.Filepath && task.Status {
+		if task.Filepath == nustTask.Filepath && task.Success {
 			console.Warning(fmt.Sprintf("skipping the \"%s\" file, because it was already executed and saved to \"%s\" in the same dir\n", file, execInfoFileName))
 			return nil
 		}
 	}
+	args = append([]string{file}, args...)
 
-	err = nustDo(file, makeargs...)
+	err = runSh(args...)
 
 	// depending on error we set status to false if fail and true if ok
 	if err != nil {
-		nustTask.Status = false
+		nustTask.Success = false
 	} else {
-		nustTask.Status = true
+		nustTask.Success = true
 	}
 	// in nustDo command may be other nust tasks so we need to update nustTasks obj in case if some nusttasks were finished
 	nustTasks = loadExecInfo(filepath.Dir(file))
@@ -65,32 +66,9 @@ func DoTask(file string, makeargs ...string) error {
 	return err
 }
 
-func UndoTask(file string, makeargs ...string) error {
-	// check if exists
-	_, err := os.Stat(file)
-	if errors.Is(err, os.ErrNotExist) {
-		return err
-	}
+func NustRunForce(file string, args ...string) error {
+	args = append([]string{file}, args...)
 
-	nustTasks := loadExecInfo(filepath.Dir(file))
-	for i, task := range nustTasks {
-		// if exists and status is positive
-		if task.Filepath == file && task.Status {
-			err = nustUndo(file, makeargs...)
-			_ = saveExecInfo(filepath.Dir(file), remove(nustTasks, i))
-
-			return err
-		}
-	}
-	return ErrNotDonePrev
-}
-
-func DoTaskForce(file string, makeargs ...string) error {
-	err := nustDo(file, makeargs...)
-	return err
-}
-
-func UndoTaskForce(file string, makeargs ...string) error {
-	err := nustUndo(file, makeargs...)
+	err := runSh(args...)
 	return err
 }
