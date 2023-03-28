@@ -20,6 +20,7 @@ See more info about the tool at https://github.com/mv-kan/nust`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) == 0 {
 			console.Message("use --help flag to get more info")
+			os.Exit(1)
 			return
 		}
 
@@ -38,6 +39,7 @@ See more info about the tool at https://github.com/mv-kan/nust`,
 			var err error
 
 			filescript, args := args[0], args[1:]
+			console.Warning(fmt.Sprintf("run \"%s\" \n", filescript))
 
 			if force {
 				err = core.NustRunForce(filescript, args...)
@@ -46,7 +48,7 @@ See more info about the tool at https://github.com/mv-kan/nust`,
 			}
 
 			if err != nil {
-				console.Danger(fmt.Sprintf("(\"%s\" try number %d): %v\n", filescript, i, err))
+				console.Danger(fmt.Sprintf("(\"%s\" try number %d): %v\n", filescript, i+1, err))
 				i++
 				if i >= retries {
 					os.Exit(1)
