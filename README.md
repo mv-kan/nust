@@ -26,7 +26,7 @@ sudo rm /usr/bin/nust
 
 #### Personally
 
-Personally I would just bake in the nust program into my repo with setup like in https://github.com/mv-kan/nustpack-ubuntu2204-mysetup
+Personally I would just install nust in the folder use it and then user can delete whole setup repo folder like in https://github.com/mv-kan/nustpack-ubuntu2204-mysetup
 
 ## Using the damn thing
 
